@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import numpy as np
 import pandas as pd
@@ -8,6 +9,14 @@ modelPath = "../model/medicalCostModel2.pkl"
 model = joblib.load(modelPath)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # React dev server
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 class HealthData(BaseModel):
     age: int

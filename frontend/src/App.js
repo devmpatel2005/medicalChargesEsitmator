@@ -9,11 +9,28 @@ function App() {
   const [children, setChildren] = useState('');
   const [smoker, setSmoker] = useState('');
   const [region, setRegion] = useState('');
+  const [prediction, setPrediction] = useState(null);
+
 
   const handleSubmit = (submit) => {
     submit.preventDefault();
     const formData = { age, sex, bmi, children, smoker, region };
-    console.log("Form data:", formData);
+    fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        setPrediction(data.predicted_charges);
+        // Later → show the prediction to the user
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+
   };
 
   return (
@@ -39,7 +56,7 @@ function App() {
           value={sex}
           onChange={(submit) => setSex(submit.target.value)}
           >
-            <option value='Choose Below'></option>
+            <option value=''>Choose Below</option>
             <option value='male'>Male</option>
             <option value='female'>Female</option>
           </select>
@@ -72,10 +89,10 @@ function App() {
           <label>Smoker: </label>
           <select 
           name='smokerDropdown'
-          value={sex}
+          value={smoker}
           onChange={(submit) => setSmoker(submit.target.value)}
           >
-            <option value='Choose Below'></option>
+            <option value=''>Choose Below</option>
             <option value='yes'>Yes</option>
             <option value='no'>No</option>
           </select>
@@ -88,16 +105,22 @@ function App() {
           value={region}
           onChange={(submit) => setRegion(submit.target.value)}
           >
-            <option value='Choose Below'></option>
+            <option value=''>Choose Below</option>
             <option value='northeast'>Northeast</option>
-            <option value='northeast'>Northwest</option>
-            <option value='northeast'>Southeast</option>
-            <option value='northeast'>Southwest</option>
+            <option value='northwest'>Northwest</option>
+            <option value='southeast'>Southeast</option>
+            <option value='southwest'>Southwest</option>
           </select>
         </div>
         <button type='submit'>Predict</button>
 
       </form>
+      {prediction !== null && (
+      <div>
+        <h2>Predicted Charges: ${prediction.toFixed(2)}</h2>
+      </div>
+      )}
+
     </div>
   );
 }
