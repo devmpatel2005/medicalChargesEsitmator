@@ -1,6 +1,15 @@
+import { useState } from "react";
 import './App.css';
 
 function App() {
+
+  const [age, setAge] = useState('');
+  const [sex, setSex] = useState('');
+  const [bmi, setBmi] = useState('');
+  const [children, setChildren] = useState('');
+  const [smoker, setSmoker] = useState('');
+  const [region, setRegion] = useState('');
+
   return (
     <div className="App">
       <h1>Medical Cost Estimator</h1>
