@@ -6,7 +6,12 @@ import pandas as pd
 from pydantic import BaseModel
 
 modelPath = "../model/medicalCostModel2.pkl"
-model = joblib.load(modelPath)
+try:
+    model = joblib.load(modelPath)
+    print("✅ Model loaded successfully!")
+except Exception as e:
+    print(f"❌ Error loading model: {e}")
+    exit(1)
 
 app = FastAPI()
 
