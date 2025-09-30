@@ -105,7 +105,7 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch("https://medicalchargesesitmator.onrender.com", {
+      const response = await fetch("https://medicalchargesesitmator.onrender.com/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
