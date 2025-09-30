@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel
 
-modelPath = "../model/medicalCostModel2.pkl"
+modelPath = "medicalCostModel2.pkl"
 try:
     model = joblib.load(modelPath)
     print("✅ Model loaded successfully!")
