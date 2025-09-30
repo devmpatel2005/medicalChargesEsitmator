@@ -17,7 +17,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://medical-charges-esitmator.vercel.app/"],  # React dev server
+    allow_origins=["https://medical-charges-esitmator.vercel.app"],  # React dev server
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
