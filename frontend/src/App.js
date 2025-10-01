@@ -410,7 +410,7 @@ function App() {
                     </div>
                   </div>
                   <div className="result-note">
-                    This is an estimated annual medical insurance cost based on your profile
+                    This is your estimated annual medical costs based on your profile
                   </div>
                 </div>
               </div>
